@@ -2,7 +2,7 @@
 export const SETTINGS = {
   openDays: [1, 2, 3, 4, 5, 6, 7, 0], // All week
   openTime: "08:00",
-  closeTime: "00:00"
+  closeTime: "18:00"
 };
 
 // Map configuration

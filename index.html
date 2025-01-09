@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bogor Pass</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #008080; /* Teal */
+    }
+    #content {
+      animation: slide-in 0.5s ease-out; /* Slide-in animation */
+    }
+    .container {
+      background-color: #8B0000; /* Dark Red */
+      margin-left: -30px; /* Shift UI slightly to the left */
+      animation: slide-in 0.5s ease-out; /* Slide-in animation */
+    }
+    h1, h2 {
+      color: #8B0000; /* Dark Red */
+      text-shadow: 2px 2px 4px #000000; /* Text shadow */
+    }
+    h3 {
+      color: #FFFF00; /* Bright Yellow */
+      text-shadow: 2px 2px 4px #000000; /* Text shadow */
+    }
+    button {
+      box-shadow: 2px 2px 4px #000000; /* Button shadow */
+    }
+    .order-btn {
+      margin-right: 60px; /* Move button more to the right */
+    }
+    @keyframes slide-in {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">
+    <div class="countdown-container">
+      <div id="countdown">00:00:00</div>
+      <div id="message" class="message">hai...kita sedang tutup coba nanti pagi yaa</div>
+    </div>
+  </div>
+
+  <div id="content">
+    <h1>BOGOR STREETPASS</h1>
+    <h2>OJEK ONLINE KAB.BOGOR DAN SEKITAR</h2>
+    <h3>spek? guys ini ojek :D</h3>
+    <div class="container">
+      <div class="column map-column">
+        <div id="map" class="map-container"></div>
+        
+        <div id="step-pickup" class="step active">
+          <h3>Pick-up Location</h3>
+          <div class="button-group">
+            <button class="pick-me-btn" id="auto-location">AUTO LOCATION</button>
+            <button class="submit-btn" id="confirm-pickup" disabled>KONFIRMASI PICKUP</button>
+          </div>
+        </div>
+        
+        <div id="step-destination" class="step">
+          <h3>Destination <span id="weather-info"></span></h3>
+          <div class="search-container">
+            <input type="text" id="address-search" placeholder="Search address" />
+            <div id="address-results"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <h3>Services</h3>
+        <label for="service">Choose a Service:</label>
+        <select id="service">
+          <option value="Ojek">OJEK</option>
+        </select>
+        <div id="argo" class="argo-info">Argo: Rp 0</div>
+      </div>
+    </div>
+
+    <button class="order-btn" id="order-button" disabled>ORDER SEKARANG</button>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script type="module" src="./src/main.js"></script>
+
+</body>
+</html>

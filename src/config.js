@@ -1,7 +1,7 @@
 export const SETTINGS = {
   openDays: [1, 2, 3, 4, 5, 6, 7, 0],
-  openTime: "08:12",
-  closeTime: "18:59"
+  openTime: "08:00",
+  closeTime: "18:00"
 };
 
 export const CONFIG = {

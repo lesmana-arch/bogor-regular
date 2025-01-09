@@ -68,7 +68,7 @@ export function getLocation() {
       } else {
         const center = calculatePolygonCenter(POLYGON_COORDINATES);
         marker.setLatLng([center.lat, center.lng]);
-        alert('LAYANAN KHUSUS GUNUNG PUTRI');
+        alert('PASTIKAN LOKASI BERADA DALAM RADIUS LAYANAN');
       }
     });
   } else {
@@ -93,7 +93,7 @@ function confirmPickup() {
 
 export function setDestination(position) {
   if (!isPointInPolygon(position, POLYGON_COORDINATES)) {
-    alert('LAYANAN KHUSUS GUNUNG PUTRI');
+    alert('PASTIKAN LOKASI BERADA DALAM RADIUS LAYANAN');
     return false;
   }
   

@@ -32,7 +32,7 @@ function setupMarkerEvents() {
     if (!isPointInPolygon(position, POLYGON_COORDINATES)) {
       const center = calculatePolygonCenter(POLYGON_COORDINATES);
       event.target.setLatLng([center.lat, center.lng]);
-      alert('LAYANAN KHUSUS GUNUNG PUTRI');
+      alert('PASTIKAN LOKASI BERADA DALAM RADIUS LAYANAN');
       return;
     }
     

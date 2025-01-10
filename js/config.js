@@ -1,6 +1,6 @@
 // Website scheduler settings
 export const SETTINGS = {
-  openDays: [1, 2, 3, 4, 5, 6, 7, 0], // All week
+  openDays: [1, 2, 3, 4, 6, 7, 0], // jumat harusnya libur
   openTime: "08:00",
   closeTime: "18:00"
 };

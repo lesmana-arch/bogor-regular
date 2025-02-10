@@ -3,7 +3,7 @@ export const SETTINGS = {
   openTime: "08:00",
   closeTime: "18:00"
 };
-
+//INI KODE CONFIG YANG BERFUNGSI!!!!!
 export const CONFIG = {
   DEFAULT_ZOOM: 13,
   FIRST_KM_RATE: 10000,

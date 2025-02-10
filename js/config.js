@@ -8,7 +8,7 @@ export const SETTINGS = {
 // Map configuration
 export const CONFIG = {
   DEFAULT_ZOOM: 13,
-  FIRST_KM_RATE: 10000, // Default rate for first kilometer
+  FIRST_KM_RATE: 80000, // Default rate for first kilometer
   NEXT_KM_RATE: 2000,  // Default rate for subsequent kilometers
   API_KEY: "pk.9acafd08e3a713792f86eb543d5c41c2",
   WEATHER_API_KEY: "5273980d01c5005aa4a4ab42d1f06356",

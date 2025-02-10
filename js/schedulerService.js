@@ -5,8 +5,8 @@ export class Scheduler {
     this.countdownInterval = null;
     this.messageIndex = 0;
     this.messages = [
-      "hai...kita sedang tutup coba nanti pagi yaa",
-      "kita akan buka setelah countdown selesai :D"
+      "HALO!!...jadwal buka sabtu s/d kamis dari jam 08:00 s/d 18:00 (jumat libur yaa :D)",
+      "tunggu countdown habis ya guys,setelah itu reload web :D..."
     ];
   }
 

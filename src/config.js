@@ -1,7 +1,7 @@
 export const SETTINGS = {
   openDays: [1, 2, 3, 4, 6, 7, 0],
   openTime: "08:00",
-  closeTime: "19:00"
+  closeTime: "18:00"
 };
 //INI KODE CONFIG YANG BERFUNGSI!!!!!
 //SETELAH DI EDIT BUTUH WAKTU SEKITAR 5 MENIT UNTUK MELIHAT PERUBAHAN DI WEBSITE

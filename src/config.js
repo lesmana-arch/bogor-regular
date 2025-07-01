@@ -1,0 +1,15 @@
+export const SETTINGS = {
+  openDays: [1, 2, 3, 4, 5, 6, 7, 0],
+  openTime: "17:00",
+  closeTime: "23:59"};
+
+//INI KODE CONFIG YANG BERFUNGSI!!
+
+export const CONFIG = {
+  DEFAULT_ZOOM: 13,
+  FIRST_KM_RATE: 10000,
+  NEXT_KM_RATE: 1700,
+  API_KEY: "pk.9acafd08e3a713792f86eb543d5c41c2",
+  WEATHER_API_KEY: "5273980d01c5005aa4a4ab42d1f06356",
+  WHATSAPP_NUMBER: "6289506105562"
+};

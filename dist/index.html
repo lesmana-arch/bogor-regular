@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Bogor Pass</title>
+  <meta name="description" content="Ojek online terpercaya di Kabupaten Bogor dan sekitarnya">
+  <meta name="theme-color" content="#2563eb">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+  <link rel="preload" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" as="style">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- PWA support -->
+  <link rel="manifest" href="/assets/manifest-BBFNjO38.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bogor Pass">
+  
+  <style>
+    /* Initial loading state */
+    body {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+    
+    body.loaded {
+      opacity: 1;
+    }
+    
+    /* Loading screen */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+    
+    .loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .loading-logo {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .loading-logo svg {
+      width: 40px;
+      height: 40px;
+      color: #2563eb;
+    }
+    
+    .loading-text {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    
+    .loading-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      animation: fadeInUp 1s ease-out 0.7s both;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-C9EChxdR.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Bj5RbXrj.css">
+</head>
+<body>
+  <!-- Loading screen -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-logo">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+      </svg>
+    </div>
+    <div class="loading-text">BOGOR PASS</div>
+    <div class="loading-subtitle">Ojek Online Terpercaya</div>
+  </div>
+
+  <!-- Dark mode toggle with proper icons -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <!-- Sun icon for light mode -->
+    <svg class="theme-icon sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    
+    <!-- Moon icon for dark mode -->
+    <svg class="theme-icon moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <!-- Countdown overlay -->
+  <div id="overlay">
+    <div class="countdown-container">
+      <div id="countdown">00:00:00</div>
+      <div id="message" class="message">hai...kita sedang tutup coba nanti pagi yaa</div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div id="content" class="fade-in-content">
+    <header class="header">
+      <h1 class="fade-in-element" style="animation-delay: 0.1s;">BOGOR STREETPASS</h1>
+      <h2 class="fade-in-element" style="animation-delay: 0.2s;">OJEK ONLINE KAB.BOGOR DAN SEKITAR</h2>
+      <h3 class="fade-in-element" style="animation-delay: 0.3s;">spek? guys ini ojek :D</h3>
+    </header>
+    
+    <div class="container">
+      <div class="column map-column fade-in-element" style="animation-delay: 0.4s;">
+        <div id="map" class="map-container"></div>
+        
+        <div id="step-pickup" class="step active">
+          <h3>📍 Pick-up Location</h3>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
+            Gunakan tombol AUTO LOCATION untuk menentukan lokasi penjemputan Anda
+          </p>
+          <div class="button-group">
+            <button class="pick-me-btn" id="auto-location">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              AUTO LOCATION
+            </button>
+            <button class="submit-btn" id="confirm-pickup" disabled>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+              </svg>
+              KONFIRMASI PICKUP
+            </button>
+          </div>
+        </div>
+        
+        <div id="step-destination" class="step">
+          <h3>🎯 Destination <span id="weather-info"></span></h3>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
+            Cari alamat tujuan atau seret marker pada peta
+          </p>
+          <div class="search-container">
+            <input type="text" id="address-search" placeholder="Cari alamat tujuan..." />
+            <div id="address-results"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column fade-in-element" style="animation-delay: 0.5s;">
+        <h3>🚗 Services</h3>
+        <label for="service">Choose a Service:</label>
+        <select id="service">
+          <option value="Ojek">OJEK</option>
+        </select>
+        <div id="argo" class="argo-info">Argo: Rp 0</div>
+      </div>
+    </div>
+
+    <button class="order-btn fade-in-element" id="order-button" disabled style="animation-delay: 0.6s;">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+      ORDER SEKARANG
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Loading screen and fade-in animations
+    window.addEventListener('load', () => {
+      // Hide loading screen after a short delay
+      setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        const body = document.body;
+        
+        loadingScreen.classList.add('hidden');
+        body.classList.add('loaded');
+        
+        // Remove loading screen from DOM after animation
+        setTimeout(() => {
+          loadingScreen.remove();
+        }, 500);
+      }, 1500); // Show loading for 1.5 seconds
+    });
+
+    // Dark mode functionality with improved icons
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+    
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    // Set initial icon visibility
+    updateThemeIcons(currentTheme);
+    
+    function updateThemeIcons(theme) {
+      if (theme === 'dark') {
+        sunIcon.style.opacity = '0';
+        sunIcon.style.transform = 'rotate(180deg) scale(0.8)';
+        moonIcon.style.opacity = '1';
+        moonIcon.style.transform = 'rotate(0deg) scale(1)';
+      } else {
+        sunIcon.style.opacity = '1';
+        sunIcon.style.transform = 'rotate(0deg) scale(1)';
+        moonIcon.style.opacity = '0';
+        moonIcon.style.transform = 'rotate(-180deg) scale(0.8)';
+      }
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      // Add rotation animation to toggle button
+      themeToggle.style.transform = 'rotate(360deg)';
+      setTimeout(() => {
+        themeToggle.style.transform = '';
+      }, 300);
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      updateThemeIcons(newTheme);
+    });
+
+    // Performance optimizations
+    // Lazy load non-critical resources
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        // Load non-critical features when browser is idle
+      });
+    }
+
+    // Preload critical resources
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = './src/main.js';
+    document.head.appendChild(link);
+
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+  </script>
+</body>
+</html>
